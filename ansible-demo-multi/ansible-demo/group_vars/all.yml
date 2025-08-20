@@ -1,0 +1,7 @@
+---
+# Общие переменные для всех хостов
+timezone: Europe/Moscow
+admin_email: admin@example.com
+
+# Переменные для базы данных
+mysql_root_password: secure_password_123

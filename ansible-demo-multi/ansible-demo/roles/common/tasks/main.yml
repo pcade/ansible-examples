@@ -1,0 +1,38 @@
+---
+- name: Обновить кэш пакетов
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+  when: ansible_os_family == "Debian"
+
+- name: Установить базовые пакеты
+  package:
+    name:
+      - curl
+      - wget
+      - vim
+      - htop
+    state: present
+
+- name: Установить настроенный MOTD
+  template:
+    src: motd.j2
+    dest: /etc/motd
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart sshd
+
+- name: Создать пользователя для демонстрации
+  user:
+    name: demo_user
+    comment: "Demo User"
+    groups: sudo
+    append: yes
+    shell: /bin/bash
+    state: present
+
+- name: Убедиться, что пакет не установлен (демонстрация idempotency)
+  package:
+    name: telnet
+    state: absent

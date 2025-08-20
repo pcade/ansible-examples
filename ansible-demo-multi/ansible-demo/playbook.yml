@@ -1,0 +1,24 @@
+---
+- name: Demo Playbook - Установка и настройка серверов
+  hosts: all
+  become: yes
+  roles:
+    - common
+
+- name: Настройка веб-серверов
+  hosts: webservers
+  become: yes
+  roles:
+    - webserver
+
+- name: Настройка базы данных
+  hosts: database
+  become: yes
+  roles:
+    - database
+
+- name: Проверка работоспособности
+  hosts: all
+  tasks:
+    - name: Проверить доступность серверов
+      ping:

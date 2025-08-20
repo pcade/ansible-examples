@@ -1,0 +1,11 @@
+---
+- name: Демонстрация локального выполнения роли
+  hosts: localhost
+  connection: local
+  gather_facts: true  # Собираем информацию о системе
+  roles:
+    - role: demo-local
+  tasks:
+    - name: Показать завершение работы
+      ansible.builtin.debug:
+        msg: "Роль успешно выполнена локально! Проверьте созданные файлы в {{ demo_directory }}"

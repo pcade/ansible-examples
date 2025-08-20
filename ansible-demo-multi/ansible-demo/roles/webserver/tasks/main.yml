@@ -1,0 +1,30 @@
+---
+- name: Установить Nginx
+  package:
+    name: nginx
+    state: present
+
+- name: Запустить и включить Nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+
+- name: Разместить кастомную страницу
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+    owner: www-data
+    group: www-data
+    mode: 0644
+  notify: restart nginx
+
+- name: Проверить конфигурацию Nginx (демонстрация модуля command)
+  command: nginx -t
+  changed_when: false
+  check_mode: no
+
+- name: Получить статус Nginx (демонстрация модуля systemd)
+  systemd:
+    name: nginx
+  changed_when: false

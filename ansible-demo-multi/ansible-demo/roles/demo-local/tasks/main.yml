@@ -1,0 +1,34 @@
+---
+- name: Создать демонстрационную директорию
+  ansible.builtin.file:
+    path: "{{ demo_directory }}"
+    state: directory
+    mode: '0755'
+  tags: always
+
+- name: Создать демонстрационный файл
+  ansible.builtin.copy:
+    content: |
+      # Демонстрационный файл
+      Создано с помощью Ansible роли
+      Дата создания: {{ ansible_date_time.iso8601 }}
+      Хост: {{ ansible_hostname }}
+      Пользователь: {{ ansible_user_id }}
+    dest: "{{ demo_directory }}/demo_file.txt"
+    mode: '0644'
+  tags: always
+
+- name: Показать информацию о созданных файлах
+  ansible.builtin.debug:
+    msg: |
+      Создана директория: {{ demo_directory }}
+      Создан файл: {{ demo_directory }}/demo_file.txt
+      Размер директории: {{ demo_dir_stat.size }} bytes
+  when: demo_dir_stat.stat.exists
+  tags: always
+
+- name: Получить информацию о созданной директории
+  ansible.builtin.stat:
+    path: "{{ demo_directory }}"
+  register: demo_dir_stat
+  tags: always
