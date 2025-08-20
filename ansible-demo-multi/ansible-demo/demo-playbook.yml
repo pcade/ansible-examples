@@ -1,11 +1,24 @@
 ---
-- name: Демонстрация локального выполнения роли
+- name: Простая демонстрация создания файла
   hosts: localhost
   connection: local
-  gather_facts: true  # Собираем информацию о системе
-  roles:
-    - role: demo-local
+  vars:
+    demo_dir: "/tmp/ansible_test"
+    demo_file: "test_file.txt"
   tasks:
-    - name: Показать завершение работы
+    - name: Создать директорию
+      ansible.builtin.file:
+        path: "{{ demo_dir }}"
+        state: directory
+        mode: '0755'
+    - name: Создать файл с содержимым
+      ansible.builtin.copy:
+        content: |
+          Файл создан Ansible локально
+          Дата: {{ ansible_date_time.iso8601 }}
+          Хост: {{ ansible_hostname }}
+        dest: "{{ demo_dir }}/{{ demo_file }}"
+        mode: '0644'
+    - name: Показать результат
       ansible.builtin.debug:
-        msg: "Роль успешно выполнена локально! Проверьте созданные файлы в {{ demo_directory }}"
+        msg: "Создано: {{ demo_dir }}/{{ demo_file }}"

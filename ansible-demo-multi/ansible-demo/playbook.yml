@@ -1,19 +1,19 @@
 ---
 - name: Demo Playbook - Установка и настройка серверов
   hosts: all
-  become: yes
+  become: true
   roles:
     - common
 
 - name: Настройка веб-серверов
   hosts: webservers
-  become: yes
+  become: true
   roles:
     - webserver
 
 - name: Настройка базы данных
   hosts: database
-  become: yes
+  become: true
   roles:
     - database
 
@@ -21,4 +21,4 @@
   hosts: all
   tasks:
     - name: Проверить доступность серверов
-      ping:
+      ansible.builtin.ping:

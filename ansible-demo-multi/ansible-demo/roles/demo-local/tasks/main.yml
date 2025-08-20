@@ -18,17 +18,17 @@
     mode: '0644'
   tags: always
 
+- name: Получить информацию о созданной директории  # ПЕРЕМЕСТИТЕ ЭТУ ЗАДАЧУ ВВЕРХ!
+  ansible.builtin.stat:
+    path: "{{ demo_directory }}"
+  register: demo_dir_stat
+  tags: always
+
 - name: Показать информацию о созданных файлах
   ansible.builtin.debug:
     msg: |
       Создана директория: {{ demo_directory }}
       Создан файл: {{ demo_directory }}/demo_file.txt
-      Размер директории: {{ demo_dir_stat.size }} bytes
+      Размер директории: {{ demo_dir_stat.stat.size }} bytes
   when: demo_dir_stat.stat.exists
-  tags: always
-
-- name: Получить информацию о созданной директории
-  ansible.builtin.stat:
-    path: "{{ demo_directory }}"
-  register: demo_dir_stat
   tags: always
