@@ -1,0 +1,29 @@
+- name: Remove MySQL if installed (clean start)
+  ansible.builtin.apt:
+    name: mysql-server
+    state: absent
+    purge: true
+    autoremove: true
+  when: mysql_root_password is defined
+
+- name: Remove MySQL data directory
+  ansible.builtin.file:
+    path: /var/lib/mysql
+    state: absent
+  when: mysql_root_password is defined
+
+- name: Set MySQL root password pre-installation
+  ansible.builtin.debconf:
+    name: mysql-server
+    question: mysql-server/root_password
+    value: "{{ mysql_root_password }}"
+    vtype: password
+  when: mysql_root_password is defined
+
+- name: Set MySQL root password confirmation
+  ansible.builtin.debconf:
+    name: mysql-server
+    question: mysql-server/root_password_again
+    value: "{{ mysql_root_password }}"
+    vtype: password
+  when: mysql_root_password is defined

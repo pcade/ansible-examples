@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo Site</title>
+</head>
+<body>
+    <h1>Добро пожаловать на {{ ansible_hostname }}</h1>
+    <p>Этот сервер настроен с помощью Ansible</p>
+    <p>Время настройки: {{ ansible_date_time.iso8601 }}</p>
+</body>
+</html>

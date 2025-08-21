@@ -1,0 +1,6 @@
+---
+# Путь к демонстрационной директории
+demo_directory: "/tmp/ansible_demo"
+
+# Имя демонстрационного файла
+demo_filename: "demo_file.txt"

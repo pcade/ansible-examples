@@ -1,0 +1,24 @@
+---
+- name: Простая демонстрация создания файла
+  hosts: localhost
+  connection: local
+  vars:
+    demo_dir: "/tmp/ansible_test"
+    demo_file: "test_file.txt"
+  tasks:
+    - name: Создать директорию
+      ansible.builtin.file:
+        path: "{{ demo_dir }}"
+        state: directory
+        mode: '0755'
+    - name: Создать файл с содержимым
+      ansible.builtin.copy:
+        content: |
+          Файл создан Ansible локально
+          Дата: {{ ansible_date_time.iso8601 }}
+          Хост: {{ ansible_hostname }}
+        dest: "{{ demo_dir }}/{{ demo_file }}"
+        mode: '0644'
+    - name: Показать результат
+      ansible.builtin.debug:
+        msg: "Создано: {{ demo_dir }}/{{ demo_file }}"

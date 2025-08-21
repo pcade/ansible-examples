@@ -1,0 +1,19 @@
+---
+- name: "Create directory and file locally"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: "/tmp/test_playbook_dir"
+        state: directory
+        mode: '0755'
+
+    - name: Create file with content
+      ansible.builtin.copy:
+        content: |
+          Это текст я написал используя Ansible
+          Вторая строка
+          Третья строка
+        dest: "/tmp/test_playbook_dir/test.txt"
+        mode: '0644'
