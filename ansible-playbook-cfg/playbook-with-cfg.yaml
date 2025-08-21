@@ -1,0 +1,27 @@
+---
+- name: " Create directory and file locally with cfg"
+  hosts: local_hosts
+  vars:
+    target_dir: "/tmp/test_playbook_cfg_dir"
+    file_name: "test.txt"
+    file_content: |
+      Это текст я написал используя Ansible
+      playbook, cfg, inventory
+      Дата создания: {{ ansible_date_time.date }}
+
+  tasks:
+    - name: "Create directory"
+      ansible.builtin.file:
+        path: "{{ target_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: "Create file with content"
+      ansible.builtin.copy:
+        content: "{{ file_content }}"
+        dest: "{{ target_dir }}/{{ file_name }}"
+        mode: '0644'
+
+    - name: "Show created file info"
+      ansible.builtin.debug:
+        msg: "На хосте {{ inventory_hostname }} создан файл: {{ target_dir }}/{{ file_name }}"
