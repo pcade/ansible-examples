@@ -11,12 +11,6 @@
   roles:
     - webserver
 
-- name: Настройка базы данных
-  hosts: database
-  become: true
-  roles:
-    - database
-
 - name: Проверка работоспособности
   hosts: all
   tasks:
