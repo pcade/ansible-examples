@@ -21,7 +21,7 @@
     owner: root
     group: root
     mode: '0644'
-  notify: restart sshd
+  notify: Restart sshd
 
 - name: Создать пользователя для демонстрации
   ansible.builtin.user:
