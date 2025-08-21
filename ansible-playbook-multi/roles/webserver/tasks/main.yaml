@@ -17,7 +17,7 @@
     owner: www-data
     group: www-data
     mode: "0644"
-  notify: restart nginx
+  notify: Restart nginx
 
 - name: Проверить конфигурацию Nginx (демонстрация модуля command)
   ansible.builtin.command: nginx -t
