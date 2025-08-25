@@ -22,13 +22,13 @@
   tasks:
     - name: "Создаем основную директорию для пользователей"
       ansible.builtin.file:
-        path: "/home/users"
+        path: "/tmp/users"
         state: directory
         mode: '0755'
 
     - name: "Создаем директорию для каждого пользователя"
       ansible.builtin.file:
-        path: "/home/users/{{ item.key }}"
+        path: "/tmp/users/{{ item.key }}"
         state: directory
         mode: '0755'
       loop: "{{ users | dict2items }}"
@@ -40,7 +40,7 @@
           Отдел: {{ item.value.department }}
           Email: {{ item.value.email }}
           Дата создания: {{ ansible_date_time.date if ansible_date_time is defined else '2024-01-01' }}
-        dest: "/home/users/{{ item.key }}/info.txt"
+        dest: "/tmp/users/{{ item.key }}/info.txt"
         mode: '0644'
       loop: "{{ users | dict2items }}"
 
