@@ -1,0 +1,44 @@
+---
+- name: "Демонстрация loop и until для создания файлов"
+  hosts: local
+  gather_facts: false
+  vars:
+    max_retries: 5
+    retry_delay: 2
+
+  tasks:
+    - name: "Создаем временную директорию"
+      ansible.builtin.file:
+        path: /tmp/ansible_demo
+        state: directory
+        mode: '0755'
+      register: temp_dir
+
+    - name: "Демонстрация loop - создаем несколько файлов"
+      ansible.builtin.copy:
+        content: "Это файл {{ item }} создан в {{ ansible_date_time.iso8601 }}"
+        dest: "/tmp/ansible_demo/file_{{ item }}.txt"
+        mode: '0644'
+      loop:
+        - 1
+        - 2
+        - 3
+        - 4
+        - 5
+      register: files_created
+
+    - name: "Показываем созданные файлы"
+      ansible.builtin.debug:
+        msg: "Создан файл: {{ item.dest }}"
+      loop: "{{ files_created.results }}"
+
+    - name: "Демонстрация until - пытаемся создать файл с проверкой"
+      ansible.builtin.copy:
+        content: "Этот файл создан после нескольких попыток"
+        dest: "/tmp/ansible_demo/verified_file.txt"
+        mode: '0644'
+      register: verification_result
+      until: verification_result is succeeded
+      retries: "{{ max_retries }}"
+      delay: "{{ retry_delay }}"
+      ignore_errors: true

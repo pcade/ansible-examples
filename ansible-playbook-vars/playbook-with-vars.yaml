@@ -23,5 +23,9 @@
         mode: '0644'
 
     - name: "Show created file info"
+      ansible.builtin.set_fact:
+        print_result: "Создан файл: {{ target_dir }}/{{ file_name }}"
+
+    - name: "Show created file info"
       ansible.builtin.debug:
-        msg: "Создан файл: {{ target_dir }}/{{ file_name }}"
+        msg: "{{ print_result }}"
