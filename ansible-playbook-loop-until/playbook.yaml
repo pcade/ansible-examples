@@ -1,7 +1,7 @@
 ---
 - name: "Демонстрация loop и until для создания файлов"
   hosts: local
-  gather_facts: false
+  gather_facts: true
   vars:
     max_retries: 5
     retry_delay: 2
@@ -16,7 +16,7 @@
 
     - name: "Демонстрация loop - создаем несколько файлов"
       ansible.builtin.copy:
-        content: "Это файл {{ item }} создан в {{ ansible_date_time.iso8601 }}"
+        content: "Это файл {{ item }} создан в {{ ansible_date_time.date }}"
         dest: "/tmp/ansible_demo/file_{{ item }}.txt"
         mode: '0644'
       loop:

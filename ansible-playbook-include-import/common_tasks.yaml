@@ -1,0 +1,4 @@
+---
+- name: Common task - shows variable value
+  ansible.builtin.debug:
+    msg: "Variable value: {{ file_name }}"

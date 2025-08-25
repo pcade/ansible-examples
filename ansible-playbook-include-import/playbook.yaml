@@ -1,0 +1,19 @@
+---
+- name: "Демонстрация include и import с условиями"
+  hosts: all
+  gather_facts: true
+  vars:
+    hosts_to_process: ["host1", "host2", "host3"]
+
+  tasks:
+    - name: "Import"
+      ansible.builtin.import_tasks: common_tasks.yaml
+      when: inventory_hostname == "host1"
+      vars:
+        file_name: "imported_conditional"
+
+    - name: "Include"
+      ansible.builtin.include_tasks: common_tasks.yaml
+      when: inventory_hostname == "host1"
+      vars:
+        file_name: "included_conditional"
