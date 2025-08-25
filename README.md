@@ -35,6 +35,13 @@
 - **ansible-playbook -i `наименование файла inventory` `наименование playbook`** — запуск `playbook` при условии что `hosts` описан в самом `inventory`;
 - **ansible -i `наименование файла inventory` all -m ping** — проверить доступных `hosts` из `inventory`;
 - `inventories/` — инвентарные файлы
+>> Vaults
+- **ansible-vault `наименование vaults`** - Создать и начать редактировать новый зашифрованный `vaults`;
+- **ansible-vault `наименование vaults`** - Отредактировать существующий зашифрованный `vaults`;
+- **ansible-vault `наименование vaults`** - Зашифровать существующий текстовый `vaults`;
+- **ansible-vault `наименование vaults`** - Просмотреть содержимое зашифрованного `vaults`;
+- **ansible-playbook playbook.yml --ask-vault-pass** - Запустить плейбук с запросом пароля;
+
 
 ## Контакты
 
