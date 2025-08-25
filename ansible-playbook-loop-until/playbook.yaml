@@ -27,11 +27,6 @@
         - 5
       register: files_created
 
-    - name: "Показываем созданные файлы"
-      ansible.builtin.debug:
-        msg: "Создан файл: {{ item.dest }}"
-      loop: "{{ files_created.results }}"
-
     - name: "Демонстрация until - пытаемся создать файл с проверкой"
       ansible.builtin.copy:
         content: "Этот файл создан после нескольких попыток"

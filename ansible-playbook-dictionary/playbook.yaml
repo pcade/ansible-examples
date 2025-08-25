@@ -1,0 +1,50 @@
+---
+- name: "Создание директорий и файлов для пользователей"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    users:
+      ivan:
+        full_name: "Иван Иванов"
+        department: "IT"
+        email: "ivan@ibm.com"
+      petr:
+        full_name: "Петр Петров"
+        department: "Бухгалтерия"
+        email: "petr@ibm.com"
+      maria:
+        full_name: "Мария Миронова"
+        department: "HR"
+        email: "maria@ibm.com"
+
+  tasks:
+    - name: "Создаем основную директорию для пользователей"
+      ansible.builtin.file:
+        path: "/home/users"
+        state: directory
+        mode: '0755'
+
+    - name: "Создаем директорию для каждого пользователя"
+      ansible.builtin.file:
+        path: "/home/users/{{ item.key }}"
+        state: directory
+        mode: '0755'
+      loop: "{{ users | dict2items }}"
+
+    - name: "Создаем файл с информацией о каждом пользователе"
+      ansible.builtin.copy:
+        content: |
+          Полное имя: {{ item.value.full_name }}
+          Отдел: {{ item.value.department }}
+          Email: {{ item.value.email }}
+          Дата создания: {{ ansible_date_time.date if ansible_date_time is defined else '2024-01-01' }}
+        dest: "/home/users/{{ item.key }}/info.txt"
+        mode: '0644'
+      loop: "{{ users | dict2items }}"
+
+    - name: "Показываем результат"
+      ansible.builtin.debug:
+        msg: "Создана директория и файл для пользователя {{ item.key }}"
+      loop: "{{ users | dict2items }}"
