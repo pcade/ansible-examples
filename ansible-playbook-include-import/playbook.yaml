@@ -11,10 +11,10 @@
       ansible.builtin.import_tasks: common_tasks.yaml
       when: inventory_hostname == "host1"
       vars:
-        file_name: "imported_conditional"
+        file_name: "imported"
 
     - name: "Include"
       ansible.builtin.include_tasks: common_tasks.yaml
       when: inventory_hostname == "host1"
       vars:
-        file_name: "included_conditional"
+        file_name: "included"
