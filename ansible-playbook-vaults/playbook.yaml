@@ -1,0 +1,41 @@
+---
+- name: "Демонстрация Ansible Vault"
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: "Показываем обычные переменные (не секретные)"
+      ansible.builtin.debug:
+        msg:
+          - "База данных: {{ db_name }}"
+          - "Хост: {{ db_host }}"
+          - "Версия приложения: {{ app_version }}"
+
+    - name: "Показываем зашифрованные переменные из Vault"
+      ansible.builtin.debug:
+        msg:
+          - "Пароль БД: {{ db_password }}"
+          - "API Ключ: {{ api_key }}"
+          - "Email админа: {{ admin_email }}"
+
+    - name: "Создаем конфиг файл (с секретом)"
+      ansible.builtin.copy:
+        content: |
+          # Конфигурация приложения
+          DB_PASSWORD={{ db_password }}
+          API_KEY={{ api_key }}
+          DB_HOST={{ db_host }}
+        dest: "./app_config.conf"
+        mode: "0600"
+      delegate_to: localhost
+
+    - name: "Проверяем создание файла"
+      ansible.builtin.stat:
+        path: "./app_config.conf"
+      register: config_file
+      delegate_to: localhost
+
+    - name: "Показываем информацию о созданном файле"
+      ansible.builtin.debug:
+        msg: "Конфиг файл создан: {{ config_file.stat.exists }}, размер: {{ config_file.stat.size }} bytes"
+      when: config_file.stat.exists

@@ -1,0 +1,4 @@
+# Обычные переменные (не секретные)
+db_host: "localhost"
+db_name: "myapp_db"
+app_version: "1.0.0"
