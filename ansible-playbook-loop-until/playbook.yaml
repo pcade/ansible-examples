@@ -1,6 +1,7 @@
 ---
 - name: "Демонстрация loop и until для создания файлов"
-  hosts: local
+  hosts: localhost
+  connection: local
   gather_facts: true
   vars:
     max_retries: 5
