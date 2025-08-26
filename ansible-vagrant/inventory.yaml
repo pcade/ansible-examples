@@ -3,6 +3,7 @@ all:
     vagrant:
       hosts:
         demo-vm:
-          ansible_host: 192.168.56.10
+          ansible_host: 192.168.56.8
           ansible_user: "{{ vault_vagrant_user }}"
-          ansible_password: "{{ vault_vagrant_pass }}"
+          ansible_ssh_private_key_file: "{{ vault_vagrant_key }}"
+          ansible_ssh_common_args: "-o StrictHostKeyChecking=no"
