@@ -18,7 +18,7 @@
 
 - name: Configure VM and install Apache
   hosts: vagrant
-  become: yes
+  become: true
   tasks:
     - name: Install Apache
       ansible.builtin.package:

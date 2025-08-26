@@ -36,10 +36,10 @@
 - **ansible -i `наименование файла inventory` all -m ping** — проверить доступных `hosts` из `inventory`;
 - `inventories/` — инвентарные файлы
 >> Vaults
-- **ansible-vault `наименование vaults`** - Создать и начать редактировать новый зашифрованный `vaults`;
-- **ansible-vault `наименование vaults`** - Отредактировать существующий зашифрованный `vaults`;
-- **ansible-vault `наименование vaults`** - Зашифровать существующий текстовый `vaults`;
-- **ansible-vault `наименование vaults`** - Просмотреть содержимое зашифрованного `vaults`;
+- **ansible-vault create `наименование vaults`** - Создать и начать редактировать новый зашифрованный `vaults`;
+- **ansible-vault edit `наименование vaults`** - Отредактировать существующий зашифрованный `vaults`;
+- **ansible-vault encrypt `наименование vaults`** - Зашифровать существующий текстовый `vaults`;
+- **ansible-vault view `наименование vaults`** - Просмотреть содержимое зашифрованного `vaults`;
 - **ansible-playbook playbook.yml --ask-vault-pass** - Запустить плейбук с запросом пароля;
 >> Tags
 - **ansible-playbook demo-tags.yml --tags `update,docker`** - запустить `playbook` с определенными `tags`;
