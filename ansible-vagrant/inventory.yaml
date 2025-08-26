@@ -1,0 +1,8 @@
+all:
+  children:
+    vagrant:
+      hosts:
+        demo-vm:
+          ansible_host: 192.168.56.10
+          ansible_user: "{{ vault_vagrant_user }}"
+          ansible_password: "{{ vault_vagrant_pass }}"
