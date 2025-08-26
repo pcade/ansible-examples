@@ -1,0 +1,27 @@
+---
+- name: Download and start Vagrant VM
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Download Vagrantfile
+      ansible.builtin.get_url:
+        url: "{{ vault_vagrant_repo }}"
+        dest: ./Vagrantfile
+      tags: [download]
+
+    - name: Run vagrant up
+      ansible.builtin.command: vagrant up
+      args:
+        chdir: .
+      tags: [vagrant]
+
+- name: Configure VM and install Apache
+  hosts: vagrant
+  become: yes
+  tasks:
+    - name: Install Apache
+      ansible.builtin.package:
+        name: apache2
+        state: present
+      tags: [apache]
