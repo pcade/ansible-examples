@@ -14,6 +14,7 @@
 - [**ansible-playbook-include-import**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-include-import) - `playbook` для демонстрации раличий между модулями `import` и `include` применяемых в `Ansible`;
 - [**ansible-playbook-vaults**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-vaults) - `playbook` для взаимодействия с секретами в `Ansible`;
 - [**ansible-playbook-tags**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-tags) - `playbook` для проверки работы `tags` в `Ansible`;
+- [**ansible-vagrant**](https://github.com/pcade/ansible-examples/tree/main/ansible-vagrant) - `playbook` для демонстрации связи `Ansible` + `Vagrant`;
 
 ## Быстрый старт
 

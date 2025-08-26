@@ -4,16 +4,19 @@
   connection: local
   gather_facts: false
   tasks:
-    - name: Download Vagrantfile
+    - name: "Download Vagrantfile"
       ansible.builtin.get_url:
         url: "{{ vault_vagrant_repo }}"
         dest: ./Vagrantfile
+        mode: '0644'
       tags: [download]
 
-    - name: Run vagrant up
+    - name: "Run vagrant up"
       ansible.builtin.command: vagrant up
       args:
         chdir: .
+      register: vagrant_up_otput
+      changed_when: "'Machine already provisioned' not in vagrant_up_otput.stdout"
       tags: [vagrant]
 
 - name: Configure VM and install Apache
