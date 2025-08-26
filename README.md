@@ -13,7 +13,7 @@
 - [**ansible-playbook-dictionary**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-dictionary) - `playbook` для демонстрации возможности использования словарей и циклов в `Ansible`;
 - [**ansible-playbook-include-import**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-include-import) - `playbook` для демонстрации раличий между модулями `import` и `include` применяемых в `Ansible`;
 - [**ansible-playbook-vaults**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-vaults) - `playbook` для взаимодействия с секретами в `Ansible`;
-- [**ansible-playbook-handlers**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-handlers) - `playbook` для проверки работы `handlers` в `Ansible`;
+- [**ansible-playbook-tags**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-tags) - `playbook` для проверки работы `tags` в `Ansible`;
 
 ## Быстрый старт
 
@@ -41,7 +41,9 @@
 - **ansible-vault `наименование vaults`** - Зашифровать существующий текстовый `vaults`;
 - **ansible-vault `наименование vaults`** - Просмотреть содержимое зашифрованного `vaults`;
 - **ansible-playbook playbook.yml --ask-vault-pass** - Запустить плейбук с запросом пароля;
-
+>> Tags
+- **ansible-playbook demo-tags.yml --tags `update,docker`** - запустить `playbook` с определенными `tags`;
+- **ansible-playbook demo-tags.yml --skip-tags `update,docker`** - запустить `playbook` без определенными `tags`;
 
 ## Контакты
 
