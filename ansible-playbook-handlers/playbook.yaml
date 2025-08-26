@@ -1,6 +1,7 @@
 ---
 - name: Демонстрация работы Handlers
-  hosts: all
+  hosts: localhost
+  connection: local
   become: true
   # Импортируем handlers из отдельного файла
   handlers:
