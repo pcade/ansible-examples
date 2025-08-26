@@ -11,6 +11,17 @@
         mode: '0644'
       tags: [download]
 
+    - name: Check if vagrant box 'ubuntu/jammy64' is installed
+      ansible.builtin.command: vagrant box list
+      register: vagrant_boxes
+      changed_when: false
+      tags: [vagrant]
+
+    - name: Download vagrant box if missing
+      ansible.builtin.command: vagrant box add ubuntu/jammy64 --provider virtualbox --clean
+      when: "'ubuntu/jammy64' not in vagrant_boxes.stdout"
+      tags: [vagrant]
+
     - name: "Run vagrant up"
       ansible.builtin.command: vagrant up
       args:
