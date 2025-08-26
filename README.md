@@ -13,7 +13,7 @@
 - [**ansible-playbook-dictionary**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-dictionary) - `playbook` для демонстрации возможности использования словарей и циклов в `Ansible`;
 - [**ansible-playbook-include-import**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-include-import) - `playbook` для демонстрации раличий между модулями `import` и `include` применяемых в `Ansible`;
 - [**ansible-playbook-vaults**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-vaults) - `playbook` для взаимодействия с секретами в `Ansible`;
-
+- [**ansible-playbook-handlers**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-handlers) - `playbook` для проверки работы `handlers` в `Ansible`;
 
 ## Быстрый старт
 
