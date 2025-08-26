@@ -1,0 +1,38 @@
+---
+- name: "Демонстрация работы с Tags"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: "ВСЕГДА выполняется (тег: always)"
+      ansible.builtin.debug:
+        msg: "Эта задача выполняется ВСЕГДА, даже если не указан её тег"
+      tags: always
+
+    - name: "Задача обновления системы (тег: update)"
+      ansible.builtin.debug:
+        msg: "Выполняется обновление пакетов системы"
+      tags: update
+
+    - name: "Установка Docker (тег: docker)"
+      ansible.builtin.debug:
+        msg: "Устанавливаем Docker и зависимости"
+      tags: docker
+
+    - name: "Установка Nginx (тег: nginx)"
+      ansible.builtin.debug:
+        msg: "Устанавливаем и настраиваем Nginx"
+      tags: nginx
+
+    - name: "Настройка фаервола (тег: firewall)"
+      ansible.builtin.debug:
+        msg: "Настраиваем правила фаервола"
+      tags: firewall
+
+    - name: "Задача ТОЛЬКО по явному требованию (тег: never)"
+      ansible.builtin.debug:
+        msg: "Эта задача выполняется ТОЛЬКО если явно указать тег 'never'"
+      tags: never
+
+    - name: "Задача БЕЗ тега"
+      ansible.builtin.debug:
+        msg: "Эта задача без тега - выполняется только при запуске ВСЕГО плейбука"
