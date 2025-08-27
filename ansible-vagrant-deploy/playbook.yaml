@@ -45,6 +45,7 @@
 
     - name: Enable dev config for Apache
       ansible.builtin.command: a2enconf dev
+      changed_when: false
       when: preferred_webserver == "apache2"
       notify: Restart web server
 
