@@ -1,0 +1,55 @@
+---
+- name: Configure deployed Vagrant VM
+  hosts: all
+  gather_facts: true
+  become: true
+  vars:
+    preferred_webserver: "apache2"
+
+    dev_packages:
+      - git
+      - curl
+      - tree
+      - htop
+
+    config_files:
+      - { src: "templates/dev.conf.j2", dest: "/etc/{{ preferred_webserver }}/conf-available/dev.conf" }
+      - { src: "templates/index.html.j2", dest: "/var/www/html/index.html" }
+
+  tasks:
+    - name: Install Apache (if selected)
+      ansible.builtin.apt:
+        name: apache2
+        state: present
+      when: preferred_webserver == "apache2"
+
+    - name: Install Nginx (if selected)
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+      when: preferred_webserver == "nginx"
+
+    - name: Install a set of development tools
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ dev_packages }}"
+
+    - name: Copy multiple configuration files
+      ansible.builtin.template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        mode: '0644'
+      loop: "{{ config_files }}"
+      notify: Restart web server
+
+    - name: Enable dev config for Apache
+      ansible.builtin.command: a2enconf dev
+      when: preferred_webserver == "apache2"
+      notify: Restart web server
+
+  handlers:
+    - name: Restart web server
+      ansible.builtin.systemd:
+        name: "{{ preferred_webserver }}"
+        state: restarted

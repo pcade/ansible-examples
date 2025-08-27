@@ -28,13 +28,9 @@
         - 5
       register: files_created
 
-    - name: "Демонстрация until - пытаемся создать файл с проверкой"
+    - name: "Демонстрация when - создаем файл только на Linux"
       ansible.builtin.copy:
-        content: "Этот файл создан после нескольких попыток"
+        content: "Этот файл создан только на Linux системах"
         dest: "/tmp/ansible_demo/verified_file.txt"
         mode: '0644'
-      register: verification_result
-      until: verification_result is succeeded
-      retries: "{{ max_retries }}"
-      delay: "{{ retry_delay }}"
-      ignore_errors: true
+      when: ansible_facts['os_family'] == "RedHat" or ansible_facts['os_family'] == "Debian"
