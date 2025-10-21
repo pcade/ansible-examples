@@ -12,10 +12,6 @@
       - tree
       - htop
 
-    config_files:
-      - { src: "templates/dev.conf.j2", dest: "/etc/{{ preferred_webserver }}/conf-available/dev.conf" }
-      - { src: "templates/index.html.j2", dest: "/var/www/html/index.html" }
-
   tasks:
     - name: Install Apache (if selected)
       ansible.builtin.apt:
@@ -35,19 +31,43 @@
         state: present
       loop: "{{ dev_packages }}"
 
-    - name: Copy multiple configuration files
-      ansible.builtin.template:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
+    - name: Create simple index.html
+      ansible.builtin.copy:
+        content: |
+          <!DOCTYPE html>
+          <html>
+          <head>
+              <title>Demo Site</title>
+          </head>
+          <body>
+              <h1>Hello from Ansible!</h1>
+              <p>Webserver: {{ preferred_webserver }}</p>
+              <p>Host: {{ ansible_hostname }}</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
         mode: '0644'
-      loop: "{{ config_files }}"
       notify: Restart web server
 
-    - name: Enable dev config for Apache
-      ansible.builtin.command: a2enconf dev
-      changed_when: false
+    - name: Ensure Apache is started and enabled
+      ansible.builtin.systemd:
+        name: apache2
+        state: started
+        enabled: true
       when: preferred_webserver == "apache2"
-      notify: Restart web server
+
+    - name: Ensure Nginx is started and enabled
+      ansible.builtin.systemd:
+        name: nginx
+        state: started
+        enabled: true
+      when: preferred_webserver == "nginx"
+
+    - name: Show installation result
+      ansible.builtin.debug:
+        msg: |
+          Successfully configured {{ preferred_webserver }} on {{ ansible_hostname }}
+          Installed packages: {{ dev_packages | join(', ') }}
 
   handlers:
     - name: Restart web server
