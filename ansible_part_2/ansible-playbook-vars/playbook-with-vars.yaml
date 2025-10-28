@@ -22,10 +22,10 @@
         dest: "{{ target_dir }}/{{ file_name }}"
         mode: '0644'
 
-    - name: "Show created file info"
+    - name: "Set file info message"
       ansible.builtin.set_fact:
         print_result: "Создан файл: {{ target_dir }}/{{ file_name }}"
 
-    - name: "Show created file info"
+    - name: "Display file info message"
       ansible.builtin.debug:
         msg: "{{ print_result }}"
