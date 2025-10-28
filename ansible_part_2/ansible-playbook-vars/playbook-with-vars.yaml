@@ -1,31 +1,46 @@
 ---
-- name: "Create directory and file locally with vars"
+- name: "Example Playbook with Variables"
   hosts: localhost
   connection: local
+  gather_facts: true
   vars:
-    target_dir: "/tmp/test_playbook_vars_dir"
-    file_name: "test.txt"
-    file_content: |
-      Это текст я написал используя Ansible
-      Дата создания: {{ ansible_date_time.date }}
+    first_variable: "First variable"
+    second_variable: "Second variable"
+    version:
+      - v1
+      - v2
+      - v3
+    users:
+      - user_1: maria
+      - user_2: peter
+      - user_3: sophie
 
   tasks:
-    - name: "Create directory"
-      ansible.builtin.file:
-        path: "{{ target_dir }}"
-        state: directory
-        mode: '0755'
+    - name: "Display variables"
+      ansible.builtin.debug:
+        msg: "{{ first_variable }}, Versions: {{ version[1] }}, Users: {{ users[1].user_2 }}"
 
-    - name: "Create file with content"
-      ansible.builtin.copy:
-        content: "{{ file_content }}"
-        dest: "{{ target_dir }}/{{ file_name }}"
-        mode: '0644'
-
-    - name: "Set file info message"
+    - name: "Set variables"
       ansible.builtin.set_fact:
-        print_result: "Создан файл: {{ target_dir }}/{{ file_name }}"
+        print_result: "{{ second_variable }}, Versions: {{ version[0] }}, Users: {{ users[0].user_1 }}"
 
-    - name: "Display file info message"
+    - name: "Display seted variables"
       ansible.builtin.debug:
         msg: "{{ print_result }}"
+
+    - name: "Include vars from file"
+      ansible.builtin.include_vars:
+        file: vars.yaml
+        name: vars_from_file
+
+    - name: "Display variables from vars file"
+      ansible.builtin.debug:
+        msg: "{{ vars_from_file.first_vars_variable }}, {{ vars_from_file.second_vars_variable }}"
+
+    - name: "Display magic variables"
+      ansible.builtin.debug:
+        msg: "Playbook executed on {{ ansible_host }} {{ ansible_distribution }} at {{ ansible_date_time.time }}"
+
+#    - name: "Display all magic variables"
+#      ansible.builtin.debug:
+#        msg: "Ansible fact is {{ ansible_facts }}"
