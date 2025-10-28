@@ -4,10 +4,10 @@
 
 ## О проекте
 
-- [**ansible-playbook**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook) - `playbook` для взаимодействия с `Ansible`;
+- [**ansible_part_1/ansible-playbook**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_1/ansible-playbook) - `playbook` для взаимодействия с `Ansible`;
+- [**ansible_part_1/ansible-playbook-cfg**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_1/ansible-playbook-cfg) - `playbook` для взаимодействия с `Ansible` с применением глобальных конфигурации `ansible.cfg`; 
+- [**ansible_part_1/ansible-playbook-inventory**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_1/ansible-playbook-inventory) - `playbook` для взаимодействия с `Ansible` с применением конфигурационнх файлов для хостов `inventory.ini`;
 - [**ansible-playbook-vars**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-vars) - - `playbook` для взаимодействия с `Ansible` с применением *переменных*;
-- [**ansible-playbook-inventory**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-inventory) - `playbook` для взаимодействия с `Ansible` с применением конфигурационнх файлов для хостов `inventory.ini`;
-- [**ansible-playbook-cfg**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-cfg) - `playbook` для взаимодействия с `Ansible` с применением глобальных конфигурации `ansible.cfg`; 
 - [**ansible-playbook-multi**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-multi) - `playbook` для взаимодействия с `Ansible` для демонстрации возможности работы с несколькими хостами и демонстрации `roles`;
 - [**ansible-playbook-loop-until**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-loop-until) - `playbook` для демонстрации возможности использования циклов в `Ansible`;
 - [**ansible-playbook-dictionary**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-dictionary) - `playbook` для демонстрации возможности использования словарей и циклов в `Ansible`;
