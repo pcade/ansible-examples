@@ -1,0 +1,18 @@
+all:
+  children:
+    web_servers:
+      hosts:
+        web1:
+          ansible_host: localhost
+        web2:
+          ansible_host: localhost
+    db_servers:
+      hosts:
+        db1:
+          ansible_host: localhost
+    production:
+      children:
+        web_servers: null
+        db_servers: null
+  vars:
+    ansible_connection: local

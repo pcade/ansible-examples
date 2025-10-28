@@ -1,0 +1,69 @@
+---
+- name: "Show localhost using"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  become: false
+  tasks:
+    - name: "Shell command"
+      ansible.builtin.command: whoami
+      register: whoami_output
+      changed_when: false
+
+    - name: "Display output"
+      ansible.builtin.debug:
+        msg: "{{ whoami_output.stdout }} Show localhost using"
+
+- name: "Show all group hosts"
+  hosts: all
+  gather_facts: false
+  become: false
+  tasks:
+    - name: "Shell command"
+      ansible.builtin.shell:
+        cmd: free -h | grep Mem
+      register: process_count
+      ignore_errors: true
+      changed_when: false
+
+    - name: "Display output"
+      ansible.builtin.debug:
+        msg: "{{ process_count.stdout }} Show all group hosts"
+
+- name: "Show web_servers group hosts"
+  hosts: web_servers
+  gather_facts: false
+  become: false
+  tasks:
+    - name: "Shell command"
+      ansible.builtin.command:
+        cmd: ls
+      register: ls_output
+      changed_when: false
+
+    - name: "Display output"
+      ansible.builtin.debug:
+        msg: "{{ ls_output }} Show web_servers group hosts"
+
+- name: "Show db_servers group hosts"
+  hosts: db_servers
+  gather_facts: true
+  become: false
+  tasks:
+    - name: "Display output"
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution }} Show db_servers group hosts"
+
+- name: "Show production group hosts"
+  hosts: production
+  gather_facts: false
+  become: false
+  tasks:
+    - name: "Shell command"
+      ansible.builtin.command: whoami
+      register: whoami_output
+      changed_when: false
+
+    - name: "Display output"
+      ansible.builtin.debug:
+        msg: "{{ whoami_output.failed }} Show production group hosts"

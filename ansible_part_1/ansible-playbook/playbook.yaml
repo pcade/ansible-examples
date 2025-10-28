@@ -1,0 +1,10 @@
+---
+- name: "Create directory locally"
+  hosts: localhost
+  connection: local
+  tasks:
+    - name: Create directory
+      ansible.builtin.file:
+        path: "/tmp/test_playbook_dir"
+        state: directory
+        mode: '0755'
