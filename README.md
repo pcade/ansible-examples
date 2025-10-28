@@ -9,12 +9,12 @@
 - [**ansible_part_1/ansible-playbook-inventory**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_1/ansible-playbook-inventory) - `playbook` для взаимодействия с `Ansible` с применением конфигурационнх файлов для хостов `inventory.ini`;
 #### Ansible_part_2
 - [**ansible_part_2/ansible-playbook-vars**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-vars) - - `playbook` для взаимодействия с `Ansible` с применением *переменных*;
-- [**ansible-playbook-multi**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-multi) - `playbook` для взаимодействия с `Ansible` для демонстрации возможности работы с несколькими хостами и демонстрации `roles`;
-- [**ansible-playbook-loop-until**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-loop-until) - `playbook` для демонстрации возможности использования циклов в `Ansible`;
-- [**ansible-playbook-dictionary**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-dictionary) - `playbook` для демонстрации возможности использования словарей и циклов в `Ansible`;
-- [**ansible-playbook-include-import**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-include-import) - `playbook` для демонстрации раличий между модулями `import` и `include` применяемых в `Ansible`;
-- [**ansible-playbook-vaults**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-vaults) - `playbook` для взаимодействия с секретами в `Ansible`;
-- [**ansible-playbook-tags**](https://github.com/pcade/ansible-examples/tree/main/ansible-playbook-tags) - `playbook` для проверки работы `tags` в `Ansible`;
+- [**ansible_part_2/ansible-playbook-loop-when**](https://github.com/pcade/ansible-examples/blob/main/ansible_part_2/ansible-playbook-loop-when) - `playbook` для демонстрации возможности использования циклов в `Ansible`;
+- [**ansible_part_2/ansible-playbook-dictionary**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-dictionary) - `playbook` для демонстрации возможности использования словарей и циклов в `Ansible`;
+- [**ansible_part_2/ansible-playbook-include-import**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-include-import) - `playbook` для демонстрации раличий между модулями `import` и `include` применяемых в `Ansible`;
+- [**ansible_part_2/ansible-playbook-tags**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-tags) - `playbook` для проверки работы `tags` в `Ansible`;
+- [**ansible_part_2/ansible-playbook-vaults**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-vaults) - `playbook` для взаимодействия с секретами в `Ansible`;
+- [**ansible_part_2/ansible-playbook-multi**](https://github.com/pcade/ansible-examples/tree/main/ansible_part_2/ansible-playbook-multi) - `playbook` для взаимодействия с `Ansible` для демонстрации возможности работы с несколькими хостами и демонстрации `roles`;
 - [**ansible-vagrant**](https://github.com/pcade/ansible-examples/tree/main/ansible-vagrant) - `playbook` для демонстрации связи `Ansible` + `Vagrant`;
 
 ## Быстрый старт
